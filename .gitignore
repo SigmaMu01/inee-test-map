@@ -14,4 +14,7 @@ venv.bak/
 *.log
 *.pot
 
+# PyCharm
+.idea/
+
 start.cmd
