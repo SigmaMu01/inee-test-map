@@ -76,11 +76,24 @@ WSGI_APPLICATION = 'mapawish.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        "NAME": "mapawish_db",
+        "USER": "mapawish_db_user",
+        "PASSWORD": "qweasd",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
-
+"""
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.environ.get('DATABASE_NAME'),
+    'USER': os.environ.get('DATABASE_USER'),
+    'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+    'HOST': os.environ.get('DATABASE_HOST'), # For local development, use 'localhost' or '127.0.0.1'
+    'PORT': os.environ.get('DATABASE_PORT'), # Default PostgreSQL port is usually '5432' 
+},
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
