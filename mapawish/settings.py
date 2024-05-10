@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mnotes',
+    'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'mapawish.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         "NAME": "mapawish_db",
         "USER": "mapawish_db_user",
         "PASSWORD": "qweasd",
@@ -86,7 +87,7 @@ DATABASES = {
 }
 """
     'default': {
-    'ENGINE': 'django.db.backends.postgresql',
+    'ENGINE': 'django.contrib.gis.db.backends.postgis',
     'NAME': os.environ.get('DATABASE_NAME'),
     'USER': os.environ.get('DATABASE_USER'),
     'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
