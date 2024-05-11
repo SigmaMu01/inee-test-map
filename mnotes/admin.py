@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import User, UserMapNote, MapPinCoordinate
+from django.contrib.gis.admin import GISModelAdmin
+
+from .models import User, UserMapNote, WorldBorder
 
 
 class NoteAdmin(admin.ModelAdmin):
@@ -11,4 +13,4 @@ class NoteAdmin(admin.ModelAdmin):
 
 admin.site.register(User)
 admin.site.register(UserMapNote, NoteAdmin)
-admin.site.register(MapPinCoordinate)
+admin.site.register(WorldBorder, GISModelAdmin)

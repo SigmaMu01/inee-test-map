@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,14 +33,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'leaflet',
     'mnotes',
-    'django.contrib.gis',
+    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.gis',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.vk',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -72,29 +84,45 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mapawish.wsgi.application'
 
 
+load_dotenv()  # Load from file .env
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        "NAME": "mapawish_db",
-        "USER": "mapawish_db_user",
-        "PASSWORD": "qweasd",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),  # For local development, use 'localhost' or '127.0.0.1'
+        'PORT': os.environ.get('DATABASE_PORT'),  # Default PostgreSQL port is usually '5432'
+
     }
 }
-"""
-    'default': {
-    'ENGINE': 'django.contrib.gis.db.backends.postgis',
-    'NAME': os.environ.get('DATABASE_NAME'),
-    'USER': os.environ.get('DATABASE_USER'),
-    'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-    'HOST': os.environ.get('DATABASE_HOST'), # For local development, use 'localhost' or '127.0.0.1'
-    'PORT': os.environ.get('DATABASE_PORT'), # Default PostgreSQL port is usually '5432' 
-},
-"""
+
+
+# VK, Mail authorization
+
+LOGIN_REDIRECT_URL = '/notes/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('VK_OAUTH2_KEY')
+
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('VK_OAUTH2_SECRET')
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+# Map configuration
+
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
