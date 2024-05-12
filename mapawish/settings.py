@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ou6)$pbx3yy47-@kk+aabmcjk$od$h9cpz6+f&mi4s9kd1b9px
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'mapawish.urls'
@@ -116,6 +117,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('VK_OAUTH2_SECRET')
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 

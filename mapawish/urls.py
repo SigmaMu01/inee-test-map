@@ -22,8 +22,9 @@ from mnotes.views import logout_view
 
 urlpatterns = [
     path('', include('mnotes.urls')),
+    path('accounts/', include('allauth.urls')),
     path('accounts/login/', LoginView.as_view(), name='login'),
     path('accounts/logout/', logout_view, name='logout'),
-    path('accounts/', include('social_django.urls', namespace='social')),
+    path('accounts2/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 ]
