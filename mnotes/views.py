@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.list import ListView
 from django.contrib.auth import logout
+from django.urls import reverse
 
 import googlemaps
 from django.conf import settings
@@ -13,7 +14,10 @@ from .models import UserMapNote, City
 
 
 def index(request):
-    return render(request, "mnotes/index.html")
+    if not request.user.is_authenticated:
+        return render(request, "mnotes/index.html")
+    else:
+        return redirect(reverse("notes"))
 
 
 def logout_view(request):
@@ -38,7 +42,7 @@ class NoteView(ListView):
 def note_delete(request, pk=None):
     note = UserMapNote.objects.get(pk=pk)
     note.delete()
-    return render(request, 'mnotes/notes.html')
+    return render(request, "mnotes/notes.html")
 
 
 class MapView(View):
