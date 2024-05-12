@@ -22,8 +22,8 @@ from mnotes.views import logout_view
 
 urlpatterns = [
     path('', include('mnotes.urls')),
+    path('accounts/logout/', logout_view, name='logout'),
     path('accounts/', include('allauth.urls')),
     path('accounts/login/', LoginView.as_view(), name='login'),
-    path('accounts/logout/', logout_view, name='logout'),
     path('admin/', admin.site.urls),
 ]

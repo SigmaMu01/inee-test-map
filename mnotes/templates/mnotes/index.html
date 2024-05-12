@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Index :: Map A Wish!</title>
-    </head>
-    <body>
-        <div>
-            <a>Sign in with VK</a>
-        </div>
-        <div>
-            {% load socialaccount %}
-            {% get_providers as socialaccount_providers %}
-        </div>
-        <div>
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
+{% extends 'mnotes/base.html' %}
+{% load static %}
 
-            {% else %}
-                  <a href="{% url 'login' %}">Login</a>
-            {% endif %}
+{% block content %}
+
+{% load socialaccount %}
+{% get_providers as socialaccount_providers %}
+<div class="pageholder">
+    <div class="titleholder">
+        <div class="title">
+            <table class="header">
+                <tr>
+                    <td><img src="{% static 'mnotes/avatar_def.jpg' %}" alt="Avatar" class="avatar"></td>
+                    <td style="padding:10px"><a class="button" href="{% url 'login' %}">Sign in with VK</a></td>
+                </tr>
+            </table>
         </div>
-        <div>
-            <h3>Hello, {{ user.first_name|default:'Guest' }} {{ user.last_name|default:'' }}</h3>
-        </div>
-		<hr>
-        <div>
-            <p>Short service description.</p>
-        </div>
-    </body>
-</html>
+    </div>
+
+    <div class="linkholder">
+        <p style="padding:10px">
+            This service allows you to store your favorite memories on a map.
+            Log in into your vk account now to start using the service.
+        </p>
+    </div>
+</div>
+{% endblock %}

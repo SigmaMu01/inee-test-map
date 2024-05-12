@@ -136,6 +136,15 @@ form{
   border-radius: 50%;
 }
 
+.button {
+  background-color: #4267b1;
+  color: white;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
 .linkbox{
     display: flex;
     width:20%;
