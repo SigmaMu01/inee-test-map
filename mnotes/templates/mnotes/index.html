@@ -4,14 +4,16 @@
 {% block content %}
 
 {% load socialaccount %}
-{% get_providers as socialaccount_providers %}
+
 <div class="pageholder">
     <div class="titleholder">
         <div class="title">
             <table class="header">
                 <tr>
                     <td><img src="{% static 'mnotes/avatar_def.jpg' %}" alt="Avatar" class="avatar"></td>
-                    <td style="padding:10px"><a class="button" href="{% url 'login' %}">Sign in with VK</a></td>
+                    <td style="padding-top:15px" >
+                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                    </td>
                 </tr>
             </table>
         </div>

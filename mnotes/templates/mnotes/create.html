@@ -1,0 +1,11 @@
+{% extends 'mnotes/base.html' %}
+
+{% block content %}
+<form method="post">
+    <table>
+        {{ form }}
+    </table>
+    {% csrf_token %}
+    <button type="submit">Create</button>
+</form>
+{% endblock %}

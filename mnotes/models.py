@@ -1,18 +1,11 @@
+from django.contrib.auth.models import AbstractUser
 from django.contrib.gis.db import models
 
 from mnotes.app_defaults import *
 
 
-class User(models.Model):
-    """A table of users with a list of their map pins"""
-    token = models.CharField(max_length=64)  # PASS
-    first_name = models.CharField(max_length=32, null=True)
-    second_name = models.CharField(max_length=64, null=True)
-    avatar = models.ImageField(default=default_avatar_path())
+class User(AbstractUser):
     map_pins = models.ManyToManyField("UserMapNote", blank=True)
-
-    def __str__(self):
-        return f"{self.first_name} {self.second_name}"
 
 
 class UserMapNote(models.Model):
@@ -20,7 +13,7 @@ class UserMapNote(models.Model):
     title = models.CharField(max_length=64, verbose_name="Title")
     description = models.TextField(verbose_name="Description")
     date_published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Published")
-    map_pin_point = models.PointField()
+    map_pin_point = models.PointField(default="0101000020E61000000700004002806F3FEC03C83F02E069BF")
 
     class Meta:
         verbose_name = "Note"

@@ -1,16 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
+from django.forms import ModelForm, Textarea
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.list import ListView
 from django.contrib.auth import logout
 from django.urls import reverse
-
 import googlemaps
 from django.conf import settings
+from allauth.socialaccount.models import SocialAccount
 
-from .models import UserMapNote, City
+from .models import UserMapNote
 
 
 def index(request):
@@ -30,19 +31,52 @@ def open_map(request):
     return render(request, "mnotes/map.html")
 
 
-class NoteView(ListView):
+class NoteView(View):
     """A list of notes."""
-    template_name = "mnotes/notes.html"
-    context_object_name = "notes"
-    model = UserMapNote
-    success_url = "/notes/"
+    def get(self, request):
+        template_name = "mnotes/notes.html"
+        pins = request.user.map_pins.all()
+        pk = request.user.pk
+        avatar = "static 'mnotes/avatar_def.jpg"
+        avatar = SocialAccount.objects.get(user_id=pk).extra_data["photo"]
+        context = {"notes": pins,
+                   "avatar": avatar}
+        return render(request, template_name, context)
+
+
+class NoteCreate(ModelForm):
+    class Meta:
+        model = UserMapNote
+        fields = ["title", "description"]
+        widgets = {
+            "description": Textarea()
+        }
+
+
+@login_required(redirect_field_name=None)
+def note_create(request):
+    if request.method == "POST":
+        form = NoteCreate(request.POST)
+        if form.is_valid():
+            note = UserMapNote.objects.create(title=form["title"].value(),
+                                              description=form["description"].value())
+            note.save()
+            request.user.map_pins.add(note.pk)
+        return redirect(reverse("notes"))
+    else:
+        form = NoteCreate()
+    return render(request, "mnotes/create.html", {"form": form})
+
 
 
 @login_required(redirect_field_name=None)
 def note_delete(request, pk=None):
-    note = UserMapNote.objects.get(pk=pk)
-    note.delete()
-    return render(request, "mnotes/notes.html")
+    try:
+        if request.user.map_pins.get(pk=pk):
+            note = UserMapNote.objects.get(pk=pk)
+            note.delete()
+    finally:
+        return redirect(reverse("notes"))
 
 
 class MapView(View):
