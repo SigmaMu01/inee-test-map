@@ -47,10 +47,11 @@
                     {% endfor %}
                 </tbody>
             </table>
+        {% include 'mnotes/map.html' %}
         {% endif %}
     </div>
-    <div class="linkholder">
-        <a href="{% url 'note_create' %}">Make a note</a>
+    <div>
+        <a href="{% url 'note_create' %}" class="button">Make a note</a>
     </div>
 </div>
 

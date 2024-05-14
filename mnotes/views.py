@@ -36,11 +36,26 @@ class NoteView(View):
     def get(self, request):
         template_name = "mnotes/notes.html"
         pins = request.user.map_pins.all()
+
         pk = request.user.pk
-        avatar = "static 'mnotes/avatar_def.jpg"
         avatar = SocialAccount.objects.get(user_id=pk).extra_data["photo"]
+
+        map_key = settings.GOOGLE_API_KEY
+        locations = []
+        for pin in pins:
+            location = {
+                "lat": pin.map_pin_point.x,
+                "lng": pin.map_pin_point.y,
+                "name": pin.title
+            }
+            locations.append(location)
+
         context = {"notes": pins,
-                   "avatar": avatar}
+                   "avatar": avatar,
+                   "key": map_key,
+                   "locations": locations
+                   }
+
         return render(request, template_name, context)
 
 
@@ -105,3 +120,6 @@ class MapView(View):
         }
 
         return render(request, self.template_name, context)
+
+def test_map(request):
+    pass

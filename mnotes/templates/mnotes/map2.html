@@ -4,44 +4,33 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <script> 
-    let map
+// Initialize and add the map
+let map;
 
-    function initMap(){
+async function initMap() {
+  // The location of Uluru
+  const position = { lat: 56, lng: 60 };
+  // Request needed libraries.
+  //@ts-ignore
+  const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-        var locations = {{ locations|safe}};
-        var firstLocation = locations[0]
-        var infoWindow = []
+  // The map, centered at Uluru
+  map = new Map(document.getElementById("map"), {
+    zoom: 8,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
 
-        map = new google.maps.Map(document.getElementById("map"),{
-            center: { lat: firstLocation.lat, lng: firstLocation.lng }, 
-            zoom: 14,
-        }
-        );
+  // The marker, positioned at Uluru
+  const marker = new AdvancedMarkerElement({
+    map: map,
+    position: position,
+    title: "Uluru",
+  });
+}
 
-        locations.forEach(function (location){
-            var marker = new google.maps.Marker({
-                position: {lat: location.lat, lng: location.lng}, 
-                map: map, 
-                title: location.name
-            });
-
-            var infowindow = new google.maps.InfoWindow({
-                content: location.name, 
-            });
-
-            infoWindow.push(infowindow)
-
-            marker.addListener('click', function(){
-                infoWindow.forEach(function(iw){
-                    iw.close();
-                });
-
-                infowindow.open(map, marker)
-            });
-        });
-    }
-
-    window.initMap = initMap
+initMap();
 
 </script>
 
