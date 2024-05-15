@@ -28,7 +28,7 @@ def logout_view(request):
 
 @login_required(redirect_field_name=None)
 def open_map(request):
-    return render(request, "mnotes/map.html")
+    return render(request, "mnotes/map3.html")
 
 
 class NoteView(View):
@@ -107,19 +107,46 @@ class MapView(View):
         map_default = gmap.geocode("Yekaterinburg, Sverdlovsk Oblast, Russia")
         map_geo_cords = list(map_default[0]["geometry"]["location"].values())
         map_geo_id = map_default[0]["place_id"]
-        locations = [{
-            "lat": float(map_geo_cords[0]),
-            "lng": float(map_geo_cords[1]),
+
+        location = {
+            "lat": 56.8315958,
+            "lng": 60.6076281,
             "name": "Heh"
-        }]
+        }
         context = {
             "note": user_note,
             "map_geo": map_geo_cords,
             "key": map_key,
-            "locations": locations
+            "location": location
         }
 
         return render(request, self.template_name, context)
 
-def test_map(request):
-    pass
+
+class MapAdd(View):
+    """A list of notes."""
+    template_name = "mnotes/map3.html"
+
+    def get(self, request):
+        map_key = settings.GOOGLE_API_KEY
+        user_note = UserMapNote.objects.all()
+        # user_note_geo = MapPinCoordinate.objects.get(pk=pk)
+
+        gmap = googlemaps.Client(key=map_key)
+        map_default = gmap.geocode("Yekaterinburg, Sverdlovsk Oblast, Russia")
+        map_geo_cords = list(map_default[0]["geometry"]["location"].values())
+        map_geo_id = map_default[0]["place_id"]
+
+        location = {
+            "lat": 56.8315958,
+            "lng": 60.6076281,
+            "name": "Heh"
+        }
+        context = {
+            "note": user_note,
+            "map_geo": map_geo_cords,
+            "key": map_key,
+            "location": location
+        }
+
+        return render(request, self.template_name, context)

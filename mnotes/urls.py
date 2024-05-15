@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from .views import index, NoteView, note_create, note_delete, MapView, test_map
+from .views import index, NoteView, note_create, note_delete, MapView, MapAdd
 
 urlpatterns = [
     path("", index),
@@ -9,7 +9,7 @@ urlpatterns = [
     path("notes/", login_required(NoteView.as_view()), name="notes"),
     path("notes/delete/<int:pk>", note_delete, name="note_delete"),
     path("notes/create", note_create, name="note_create"),
-    path("test/map", test_map, name="map_test")
+    path("test/map", login_required(MapAdd.as_view()), name="map_test")
 ]
 
 # path("city/<int:pk>", MapDetailView.as_view(), name='city-detail'),
