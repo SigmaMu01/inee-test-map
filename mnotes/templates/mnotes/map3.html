@@ -1,10 +1,10 @@
-{% extends 'mnotes/base.html' %}
 {% block content %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script>
 
 async function initMap() {
   var location = {{ location|safe }};
+  document.getElementById("id_map_pin_point").value = "Place a marker on the map."
   // Request needed libraries.
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -14,22 +14,10 @@ async function initMap() {
     mapId: "3",
   });
   const infoWindow = new InfoWindow();
-  const draggableMarker = new AdvancedMarkerElement({
-    map,
-    gmpDraggable: true,
-    title: "This marker is draggable.",
-  });
-
-  draggableMarker.addListener("dragend", (event) => {
-    const position = draggableMarker.position;
-
-    infoWindow.setContent(`Pin dropped at: ${position.lat}, ${position.lng}`);
-
-  });
 
   var addMarker = once(placeMarkerAndPanTo);
-  map.addListener("click", (e) => {
-    addMarker(e.latLng, map)
+  map.addListener("click", (event) => {
+    addMarker(event.latLng, map)
   });
 }
 
@@ -45,27 +33,25 @@ function once(fn, context) {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
-  new google.maps.marker.AdvancedMarkerElement({
+  const draggableMarker = new google.maps.marker.AdvancedMarkerElement({
     position: latLng,
     map: map,
     gmpDraggable: true,
   });
   map.panTo(latLng);
-}
+  document.getElementById("id_map_pin_point").value = (`${latLng.lat()},${latLng.lng()}`);
+  document.getElementById("submit_button").disabled = false;
 
+  draggableMarker.addListener("dragend", (event) => {
+    const position = draggableMarker.position;
+    document.getElementById("id_map_pin_point").value = (`${event.latLng.lat()},${event.latLng.lng()}`);
+
+  });
+}
 
 initMap();
 
 </script>
-
-<div class="pageholder">
-    <div class="titleholder"> 
-
-        <div class="title"> Google Maps API Displaying Markers on the Map </div> 
-        
-    </div>
-
-
     <div class="linkholder">
         <div class="mapholder"> 
             <div id="map"> </div>
@@ -73,18 +59,9 @@ initMap();
             <script async
                 src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
             </script>
-
         </div>
         
      </div>
-
-
-    <div class="linkholder">  
-        <a href="{% url 'notes' %}"> Go to our homepage</a>
-
-    </div>
-
-
 
 </div>
 

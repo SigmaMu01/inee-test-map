@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from django.contrib.gis.admin import GISModelAdmin
 
-from .models import User, UserMapNote, WorldBorder
+from .models import User, UserMapNote
 
 
 class NoteAdmin(admin.ModelAdmin):
@@ -13,4 +13,3 @@ class NoteAdmin(admin.ModelAdmin):
 
 admin.site.register(User)
 admin.site.register(UserMapNote, NoteAdmin)
-admin.site.register(WorldBorder, GISModelAdmin)

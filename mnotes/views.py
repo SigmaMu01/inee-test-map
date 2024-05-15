@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.gis.geos import Point
 from django.contrib.messages.views import SuccessMessageMixin
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, TextInput
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
@@ -40,7 +41,6 @@ class NoteView(View):
         pk = request.user.pk
         avatar = SocialAccount.objects.get(user_id=pk).extra_data["photo"]
 
-        map_key = settings.GOOGLE_API_KEY
         locations = []
         for pin in pins:
             location = {
@@ -52,7 +52,7 @@ class NoteView(View):
 
         context = {"notes": pins,
                    "avatar": avatar,
-                   "key": map_key,
+                   "key": settings.GOOGLE_API_KEY,
                    "locations": locations
                    }
 
@@ -62,26 +62,39 @@ class NoteView(View):
 class NoteCreate(ModelForm):
     class Meta:
         model = UserMapNote
-        fields = ["title", "description"]
+        fields = ["title", "description", "map_pin_point"]
         widgets = {
-            "description": Textarea()
+            "description": Textarea(attrs={'rows': 5}),
+            "map_pin_point": TextInput(attrs={'readonly': 'readonly', 'size': 38, 'style': 'text-align:center'})
         }
 
 
 @login_required(redirect_field_name=None)
 def note_create(request):
+
     if request.method == "POST":
         form = NoteCreate(request.POST)
-        if form.is_valid():
-            note = UserMapNote.objects.create(title=form["title"].value(),
-                                              description=form["description"].value())
-            note.save()
-            request.user.map_pins.add(note.pk)
+        cords = tuple(map(float, form["map_pin_point"].value().split(',')))
+        note = UserMapNote.objects.create(title=form["title"].value(),
+                                          description=form["description"].value(),
+                                          map_pin_point=Point(cords, srid=4326))
+        note.save()
+        request.user.map_pins.add(note.pk)
         return redirect(reverse("notes"))
     else:
         form = NoteCreate()
-    return render(request, "mnotes/create.html", {"form": form})
 
+    location = {
+        "lat": 56.8315958,
+        "lng": 60.6076281,
+        "name": "Heh"
+    }
+    context = {
+        "key": settings.GOOGLE_API_KEY,
+        "location": location,
+        "form": form,
+    }
+    return render(request, "mnotes/create.html", context)
 
 
 @login_required(redirect_field_name=None)
