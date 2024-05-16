@@ -9,7 +9,7 @@ async function initMap() {
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   const map = new Map(document.getElementById("map"), {
     center: { lat: location.lat, lng: location.lng },
-    zoom: 14,
+    zoom: 13,
     mapId: "3",
   });
   const infoWindow = new InfoWindow();
