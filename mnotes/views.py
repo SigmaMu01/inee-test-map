@@ -3,7 +3,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms import ModelForm, Textarea, TextInput
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -12,6 +11,7 @@ from django.views import View
 from allauth.socialaccount.models import SocialAccount
 
 from .app_defaults import default_location
+from .forms import NoteCreateForm
 from .models import UserMapNote
 
 
@@ -52,16 +52,6 @@ class NoteView(View):
                    }
 
         return render(request, template_name, context)
-
-
-class NoteCreateForm(ModelForm):
-    class Meta:
-        model = UserMapNote
-        fields = ["title", "description", "map_pin_point"]
-        widgets = {
-            "description": Textarea(attrs={'rows': 5}),
-            "map_pin_point": TextInput(attrs={'readonly': 'readonly', 'size': 38, 'style': 'text-align:center'})
-        }
 
 
 @login_required(redirect_field_name=None)
