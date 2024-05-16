@@ -1,0 +1,21 @@
+version: '3.12.3'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: gis_notes
+    volumes:
+      - ~/.pg/pg_data/notes:/var/lib/postgresql/data
+    env_file:
+      - .env
+  web:
+    build: .
+    command: bash -c "python manage.py migrate && python manage.py runserver 80"
+    volumes:
+      - .:/src
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    env_file:
+      - .env
