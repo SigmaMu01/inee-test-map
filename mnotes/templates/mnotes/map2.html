@@ -1,4 +1,3 @@
-{% extends 'mnotes/base.html' %}
 {% block content %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script>
@@ -18,50 +17,26 @@ async function initMap() {
     map,
     position: { lat: location.lat, lng: location.lng },
     gmpDraggable: true,
-    title: "This marker is draggable.",
   });
 
   draggableMarker.addListener("dragend", (event) => {
     const position = draggableMarker.position;
-
-    infoWindow.setContent(`Pin dropped at: ${position.lat}, ${position.lng}`);
-
+    document.getElementById("id_map_pin_point").value = (`${event.latLng.lat()},${event.latLng.lng()}`);
   });
 }
 
 initMap();
 
 </script>
+<div class="linkholder">
+    <div class="mapholder">
+        <div id="map"> </div>
 
-<div class="pageholder">
-    <div class="titleholder"> 
-
-        <div class="title"> Google Maps API Displaying Markers on the Map </div> 
-        
+        <script async
+            src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
+        </script>
     </div>
 
-
-    <div class="linkholder">
-        <div class="mapholder"> 
-            <div id="map"> </div>
-
-            <script async
-                src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
-            </script>
-
-        </div>
-        
-     </div>
-
-
-    <div class="linkholder">  
-        <a href="{% url 'notes' %}"> Go to our homepage</a>
-
-    </div>
-
-
-
-</div>
-
+ </div>
 
 {% endblock %}

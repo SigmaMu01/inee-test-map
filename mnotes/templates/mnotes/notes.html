@@ -41,7 +41,11 @@
                         <td> {{note.description}} </td>
                         <td> {{note.date_published}} </td>
                         <td> {{note.map_pin_point}} </td>
-                        <td> <a href="{% url 'note_delete' note.id %}">delete</a> </td>
+                        <td><table style="height:100%;width:100%;"><tr>
+                            <td><a href="{% url 'note_edit' note.id %}">edit</a></td>
+                            <td><a href="{% url 'note_delete' note.id %}">delete</a></td>
+                            </tr></table>
+                        </td>
 
                     </tr>
                     {% endfor %}

@@ -1,12 +1,24 @@
 {% extends 'mnotes/base.html' %}
 
 {% block content %}
-<form method="post">
-    <table>
-        {{ form }}
-    </table>
-    {% csrf_token %}
-    {% include 'mnotes/map3.html' %}
-    <button type="submit" id="submit_button" disabled>Create</button>
-</form>
+<div class="pageholder">
+    <div class="titleholder">
+        <div class="title"> Note Editor </div>
+    </div>
+    <div class="linkholder">
+        <form method="post">
+            <table>
+                {{ form }}
+            </table>
+            {% csrf_token %}
+
+            {% if is_edit %}
+                {% include 'mnotes/map2.html' %}
+            {% else %}
+                {% include 'mnotes/map3.html' %}
+            {% endif %}
+            <button class="submit" type="submit" id="submit_button">Create</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
