@@ -11,14 +11,11 @@ COPY requirements.txt .
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-#Set up the environment on a single docker layer
+# Set up the environment on a single docker layer
+# GDAL library is needed for interacting with postgis Point class
 RUN apt update && apt install -y python-is-python3 && pip install --upgrade pip && \
+    apt install -y gdal-bin && \
     pip install --no-cache-dir -r requirements.txt && \
     python -m pip uninstall -y pip setuptools
 
 COPY . .
-
-#Use the default HTTP port since vk.com auth2 does not support custom port routing for localhost
-EXPOSE 80
-
-CMD ["python", "manage.py", "runserver", "80"]
