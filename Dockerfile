@@ -19,3 +19,5 @@ RUN apt update && apt install -y python-is-python3 && pip install --upgrade pip 
     python -m pip uninstall -y pip setuptools
 
 COPY . .
+
+EXPOSE 80:80

@@ -9,7 +9,7 @@ services:
     volumes:
       - ~/.pg/pg_data/notes:/var/lib/postgresql/data
     env_file:
-      - .env
+      - .docker.env
   web:
     build:
       dockerfile: Dockerfile
@@ -23,6 +23,6 @@ services:
     ports:
       - "80:80"  # Use the default HTTP port since vk.com auth2 does not support custom port routing for localhost
     env_file:
-      - .env
+      - .docker.env
     command: >
       bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80"

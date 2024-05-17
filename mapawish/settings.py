@@ -107,21 +107,30 @@ LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('VK_OAUTH2_KEY')
-
+SOCIAL_AUTH_VK_OAUTH2_ID = os.environ.get('VK_OAUTH2_ID')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('VK_OAUTH2_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('VK_OAUTH2_KEY')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-
-
 # Map configuration
 
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
+# VK allauth authentication
+
+SOCIALACCOUNT_PROVIDERS = {
+    'vk': {
+        'APP': {
+            'client_id': SOCIAL_AUTH_VK_OAUTH2_ID,
+            'secret': SOCIAL_AUTH_VK_OAUTH2_SECRET,
+            'key': SOCIAL_AUTH_VK_OAUTH2_KEY
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
