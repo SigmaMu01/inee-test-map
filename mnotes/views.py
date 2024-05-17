@@ -14,6 +14,10 @@ from .models import UserMapNote
 
 
 def index(request):
+    """
+    Show index page with this web-service description or
+    redirect authenticated user to a list of their notes.
+    """
     if not request.user.is_authenticated:
         return render(request, "mnotes/index.html")
     else:
@@ -21,17 +25,17 @@ def index(request):
 
 
 def logout_view(request):
+    """Immediate logout with no pop-ups."""
     logout(request)
     return index(request)
 
 
 class NoteView(View):
-    """A list of notes."""
+    """A list of user notes with a map pointing to the last note address."""
 
     def get(self, request):
         template_name = "mnotes/notes.html"
         pins = request.user.map_pins.all()
-
         pk = request.user.pk
         avatar = SocialAccount.objects.get(user_id=pk).extra_data["photo"]
 
@@ -50,12 +54,12 @@ class NoteView(View):
             "key": settings.GOOGLE_API_KEY,
             "locations": locations,
         }
-
         return render(request, template_name, context)
 
 
 @login_required(redirect_field_name=None)
 def note_create(request, note=None):
+    """Create a new user note or update already existing note."""
     is_edit = False
     location = default_location()
 
@@ -75,9 +79,9 @@ def note_create(request, note=None):
             UserMapNote.objects.filter(pk=note.pk).update(**info)
         return redirect(reverse("notes"))
 
-    else:
+    else:  # If method is GET then create an empty form
         form = NoteCreateForm()
-        if note:
+        if note:  # If note is passed as argument then fill in the form (edit this note)
             form.fields["title"].initial = note.title
             form.fields["description"].initial = note.description
             form.fields["map_pin_point"].initial = (
@@ -98,6 +102,10 @@ def note_create(request, note=None):
 
 @login_required(redirect_field_name=None)
 def note_edit(request, pk=None):
+    """
+    Check if note exists and belongs to this user then call create
+    function with existing note as argument.
+    """
     try:
         if request.user.map_pins.get(pk=pk):
             note = UserMapNote.objects.get(pk=pk)
@@ -108,6 +116,7 @@ def note_edit(request, pk=None):
 
 @login_required(redirect_field_name=None)
 def note_delete(request, pk=None):
+    """Check if note exists and belongs to this user then delete it."""
     try:
         if request.user.map_pins.get(pk=pk):
             note = UserMapNote.objects.get(pk=pk)

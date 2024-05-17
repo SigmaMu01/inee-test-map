@@ -1,3 +1,5 @@
+"""Forms for user input data."""
+
 from django.forms import ModelForm, Textarea, TextInput
 
 from mnotes.models import UserMapNote
