@@ -1,19 +1,19 @@
 <!-- registration/login.html -->
 
 {% block content %}
-  <h2>Login</h2>
-    {% if user.is_authenticated %}
-      <p>You are already logged in.</p>
-    {% else %}
-      <form method="post">
-        {% csrf_token %}
-        <table>
-          {{ form.as_p }}
-          <tr>
-            <td> </td>
-            <td><input type="submit" value="Submit"></td>
-          </tr>
-        </table>
-      </form>
-    {% endif %}
+<h2>Login</h2>
+{% if user.is_authenticated %}
+<p>You are already logged in.</p>
+{% else %}
+<form method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_p }}
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Submit"></td>
+    </tr>
+  </table>
+</form>
+{% endif %}
 {% endblock %}

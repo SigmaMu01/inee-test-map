@@ -4,6 +4,7 @@ import googlemaps
 
 from mapawish.settings import BASE_DIR, GOOGLE_API_KEY
 
+
 default_location_const = "City Center, Yekaterinburg, Sverdlovsk Oblast, Russia"
 
 
@@ -20,8 +21,5 @@ def default_location():
     lat = map_geo_cords[0]
     lng = map_geo_cords[1]
 
-    location = {
-        "lat": lat,
-        "lng": lng
-    }
+    location = {"lat": lat, "lng": lng}
     return location

@@ -1,14 +1,12 @@
+from allauth.socialaccount.models import SocialAccount
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-
-from allauth.socialaccount.models import SocialAccount
 
 from .app_defaults import default_location
 from .forms import NoteCreateForm
@@ -29,6 +27,7 @@ def logout_view(request):
 
 class NoteView(View):
     """A list of notes."""
+
     def get(self, request):
         template_name = "mnotes/notes.html"
         pins = request.user.map_pins.all()
@@ -41,15 +40,16 @@ class NoteView(View):
             location = {
                 "lat": pin.map_pin_point.x,
                 "lng": pin.map_pin_point.y,
-                "name": pin.title
+                "name": pin.title,
             }
             locations.append(location)
 
-        context = {"notes": pins,
-                   "avatar": avatar,
-                   "key": settings.GOOGLE_API_KEY,
-                   "locations": locations
-                   }
+        context = {
+            "notes": pins,
+            "avatar": avatar,
+            "key": settings.GOOGLE_API_KEY,
+            "locations": locations,
+        }
 
         return render(request, template_name, context)
 
@@ -61,11 +61,12 @@ def note_create(request, note=None):
 
     if request.method == "POST":
         form = NoteCreateForm(request.POST)
-        cords = tuple(map(float, form["map_pin_point"].value().split(',')))
+        cords = tuple(map(float, form["map_pin_point"].value().split(",")))
         info = {
             "title": form["title"].value(),
             "description": form["description"].value(),
-            "map_pin_point": Point(cords, srid=4326)}
+            "map_pin_point": Point(cords, srid=4326),
+        }
         if not note:
             note = UserMapNote.objects.create(**info)
             note.save()
@@ -77,9 +78,11 @@ def note_create(request, note=None):
     else:
         form = NoteCreateForm()
         if note:
-            form.fields['title'].initial = note.title
-            form.fields['description'].initial = note.description
-            form.fields['map_pin_point'].initial = f"{note.map_pin_point.x},{note.map_pin_point.y}"
+            form.fields["title"].initial = note.title
+            form.fields["description"].initial = note.description
+            form.fields["map_pin_point"].initial = (
+                f"{note.map_pin_point.x},{note.map_pin_point.y}"
+            )
             location["lat"] = note.map_pin_point.x
             location["lng"] = note.map_pin_point.y
             is_edit = True
@@ -88,7 +91,7 @@ def note_create(request, note=None):
         "key": settings.GOOGLE_API_KEY,
         "location": location,
         "form": form,
-        "is_edit": is_edit
+        "is_edit": is_edit,
     }
     return render(request, "mnotes/create.html", context)
 

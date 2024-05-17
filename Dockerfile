@@ -1,6 +1,6 @@
 FROM python:3.12.3-slim-bookworm
 
-LABEL author="Egor Maksimov" contact="egor.maksimov.rtf@yandex.ru"
+LABEL author="Egor Maksimov" contact="egor.maksimov.d@gmail.com"
 
 SHELL ["/bin/bash", "-c"]
 
@@ -19,5 +19,3 @@ RUN apt update && apt install -y python-is-python3 && pip install --upgrade pip 
     python -m pip uninstall -y pip setuptools
 
 COPY . .
-
-EXPOSE 80:80

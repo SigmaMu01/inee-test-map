@@ -6,24 +6,24 @@
 {% load socialaccount %}
 
 <div class="pageholder">
-    <div class="titleholder">
-        <div class="title">
-            <table class="header">
-                <tr>
-                    <td><img src="{% static 'mnotes/avatar_def.jpg' %}" alt="Avatar" class="avatar"></td>
-                    <td style="padding-top:15px" >
-                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                    </td>
-                </tr>
-            </table>
-        </div>
+  <div class="titleholder">
+    <div class="title">
+      <table class="header">
+        <tr>
+          <td><img src="{% static 'mnotes/avatar_def.jpg' %}" alt="Avatar" class="avatar"></td>
+          <td style="padding-top:15px">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+          </td>
+        </tr>
+      </table>
     </div>
+  </div>
 
-    <div class="linkholder">
-        <p style="padding:10px">
-            This service allows you to store your favorite memories on a map.
-            Log in into your vk account now to start using the service.
-        </p>
-    </div>
+  <div class="linkholder">
+    <p style="padding:10px">
+      This service allows you to store your favorite memories on a map.
+      Log in into your vk account now to start using the service.
+    </p>
+  </div>
 </div>
 {% endblock %}

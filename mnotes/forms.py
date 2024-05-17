@@ -8,6 +8,8 @@ class NoteCreateForm(ModelForm):
         model = UserMapNote
         fields = ["title", "description", "map_pin_point"]
         widgets = {
-            "description": Textarea(attrs={'rows': 5}),
-            "map_pin_point": TextInput(attrs={'readonly': 'readonly', 'size': 38, 'style': 'text-align:center'})
+            "description": Textarea(attrs={"rows": 5}),
+            "map_pin_point": TextInput(
+                attrs={"readonly": "readonly", "size": 38, "style": "text-align:center"}
+            ),
         }

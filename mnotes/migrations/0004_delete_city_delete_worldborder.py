@@ -6,14 +6,14 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mnotes', '0003_alter_usermapnote_map_pin_point'),
+        ("mnotes", "0003_alter_usermapnote_map_pin_point"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='City',
+            name="City",
         ),
         migrations.DeleteModel(
-            name='WorldBorder',
+            name="WorldBorder",
         ),
     ]

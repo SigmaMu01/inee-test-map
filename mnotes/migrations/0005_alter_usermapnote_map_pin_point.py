@@ -7,13 +7,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mnotes', '0004_delete_city_delete_worldborder'),
+        ("mnotes", "0004_delete_city_delete_worldborder"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='usermapnote',
-            name='map_pin_point',
-            field=django.contrib.gis.db.models.fields.PointField(default='0101000020E61000000700004002806F3FEC03C83F02E069BF', srid=4326, verbose_name='Coordinates'),
+            model_name="usermapnote",
+            name="map_pin_point",
+            field=django.contrib.gis.db.models.fields.PointField(
+                default="0101000020E61000000700004002806F3FEC03C83F02E069BF",
+                srid=4326,
+                verbose_name="Coordinates",
+            ),
         ),
     ]
