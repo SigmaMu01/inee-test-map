@@ -20,9 +20,10 @@ services:
       - mapawish_db
     volumes:
       - .:/src
-    ports:
-      - "80:80"  # Use the default HTTP port since vk.com auth2 does not support custom port routing for localhost
+    ports:  # Use the default HTTP port since vk.com oauth2 does not support custom port routing for localhost
+      - "80:80"
     env_file:
       - .docker.env
     command: >
-      bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80"
+      bash -c "python manage.py makemigrations && python manage.py migrate && \
+      python manage.py runserver 0.0.0.0:80 --settings=mapawish.settings.prod"

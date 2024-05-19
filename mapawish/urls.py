@@ -21,7 +21,6 @@ from django.urls import include, path
 
 from mnotes.views import logout_view
 
-
 urlpatterns = [
     path("", include("mnotes.urls")),
     path("accounts/logout/", logout_view, name="logout"),

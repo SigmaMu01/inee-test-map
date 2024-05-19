@@ -26,10 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ou6)$pbx3yy47-@kk+aabmcjk$od$h9cpz6+f&mi4s9kd1b9px"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "p01--web--4cqtxswnrj4s.code.run"]
 
+CSRF_TRUSTED_ORIGINS = ["https://p01--web--4cqtxswnrj4s.code.run"]
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"  # Allauth constant for prod server
 
 # Application definition
 
