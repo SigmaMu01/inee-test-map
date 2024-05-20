@@ -110,7 +110,7 @@ class TestNotes(TestCase):
         user = auth.get_user(self.client)
 
         self.assertFalse(user.is_authenticated)
-        self.assertRedirects(response, "/accounts/login/?next=/notes/")
+        self.assertRedirects(response, "/")
 
     def test_mnotes_view_wronguser1(self):
         self.client.login(**self.user2_login)
@@ -171,7 +171,7 @@ class TestCreate(TestNotes):
     def test_mnotes_create_nouser(self):
         response = self.client.get(self.note_create_url)
 
-        self.assertRedirects(response, "/accounts/login/")
+        self.assertRedirects(response, "/")
 
     def test_mnotes_edit(self):
         self.client.login(**self.user2_login)
@@ -205,7 +205,7 @@ class TestCreate(TestNotes):
     def test_mnotes_edit_nouser(self):
         response = self.client.get(self.note_edit_url)
 
-        self.assertRedirects(response, "/accounts/login/")
+        self.assertRedirects(response, "/")
 
     def test_mnotes_edit_empty(self):
         self.client.login(**self.user1_login)
@@ -251,4 +251,4 @@ class TestDelete(TestNotes):
         response = self.client.get(self.note_delete2_url)
 
         self.assertTrue(UserMapNote.objects.get(pk=self.usermapnote3.pk))
-        self.assertRedirects(response, "/accounts/login/")
+        self.assertRedirects(response, "/")

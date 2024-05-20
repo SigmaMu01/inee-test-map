@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 
-from .app_defaults import default_location
+from .app_defaults import NO_LOGIN_REDIRECT, default_location
 from .forms import NoteCreateForm
 from .models import UserMapNote
 
@@ -61,7 +61,7 @@ class NoteView(View):
         return render(request, template_name, context)
 
 
-@login_required(redirect_field_name=None)
+@login_required(**NO_LOGIN_REDIRECT)
 def note_create(request, note=None):
     """Create a new user note or update already existing note."""
     is_edit = False
@@ -104,7 +104,7 @@ def note_create(request, note=None):
     return render(request, "mnotes/create.html", context)
 
 
-@login_required(redirect_field_name=None)
+@login_required(**NO_LOGIN_REDIRECT)
 def note_edit(request, pk=None):
     """
     Check if note exists and belongs to this user then call create
@@ -118,7 +118,7 @@ def note_edit(request, pk=None):
         return redirect(reverse("notes"))
 
 
-@login_required(redirect_field_name=None)
+@login_required(**NO_LOGIN_REDIRECT)
 def note_delete(request, pk=None):
     """Check if note exists and belongs to this user then delete it."""
     try:

@@ -11,6 +11,8 @@ from mapawish.settings import BASE_DIR, GOOGLE_API_KEY
 
 DEFAULT_LOCATION_CONST = "City Center, Yekaterinburg, Sverdlovsk Oblast, Russia"
 
+NO_LOGIN_REDIRECT = {"login_url": "index", "redirect_field_name": None}
+
 
 def default_avatar_path():
     return os.path.join(BASE_DIR, "mnotes/avt.jpg")

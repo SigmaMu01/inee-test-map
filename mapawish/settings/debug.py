@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.vk",
 ]
 
@@ -101,7 +100,7 @@ DATABASES = {
 
 AUTH_USER_MODEL = "mnotes.User"
 
-# VK, Mail authorization
+# VK authorization
 
 LOGIN_REDIRECT_URL = "/notes/"
 LOGOUT_REDIRECT_URL = "/"
@@ -117,11 +116,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-# Map configuration
-
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
-
-# VK allauth authentication
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_PROVIDERS = {
     "vk": {
@@ -132,6 +127,11 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# Map configuration
+
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
