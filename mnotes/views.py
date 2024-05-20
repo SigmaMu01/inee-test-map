@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
@@ -11,6 +12,9 @@ from django.views import View
 from .app_defaults import default_location
 from .forms import NoteCreateForm
 from .models import UserMapNote
+
+
+__all__ = ("HttpResponse",)  # Store unused functions here (flake8 dev guide)
 
 
 def index(request):
@@ -122,4 +126,4 @@ def note_delete(request, pk=None):
             note = UserMapNote.objects.get(pk=pk)
             note.delete()
     finally:
-        return redirect(reverse("notes"))
+        return redirect(reverse("notes"))  # pylint: disable=W0134,W0150

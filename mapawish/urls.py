@@ -18,8 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import include, path
-
 from mnotes.views import logout_view
+
 
 urlpatterns = [
     path("", include("mnotes.urls")),

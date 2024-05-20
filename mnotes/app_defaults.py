@@ -6,8 +6,8 @@ to the project settings.
 import os.path
 
 import googlemaps
-
 from mapawish.settings import BASE_DIR, GOOGLE_API_KEY
+
 
 DEFAULT_LOCATION_CONST = "City Center, Yekaterinburg, Sverdlovsk Oblast, Russia"
 

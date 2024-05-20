@@ -3,5 +3,5 @@ line-length = 88
 exclude = '''
 	.venv/
 	venv/
-	tests/
+	mnotes/tests/
 '''

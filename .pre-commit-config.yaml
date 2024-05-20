@@ -1,16 +1,16 @@
 repos:
   - repo: local
     hooks:
-      - id: isort
-        name: isort
-        entry: isort --settings-file ./.linters/isort.cfg .
+      - id: black
+        name: black
+        entry: black --config ./.linters/black .
         language: system
         types: [ python ]
         pass_filenames: false
 
-      - id: black
-        name: black
-        entry: black --config ./.linters/black .
+      - id: isort
+        name: isort
+        entry: isort --settings-file ./.linters/isort.cfg .
         language: system
         types: [ python ]
         pass_filenames: false
@@ -21,10 +21,10 @@ repos:
         language: system
         types: [ python ]
         pass_filenames: false
-        
+
       - id: pylint
         name: pylint
         entry: pylint
         language: system
-        types: [python]
+        types: [ python ]
         args: ["-rn", "-sn", "--rcfile=./.linters/pylintrc"]
