@@ -23,3 +23,11 @@ Link to [the server](https://p01--web--4cqtxswnrj4s.code.run/) (contact me in ca
 * Sufficient unit-test coverage (<ins>GitHub Actions implemented</ins>)
 * Docker and docker compose files included
 * The web-application is run on a VDS server
+
+## Available repo branches:
+
+| Branch  | Purpose |
+| ------------- | ------------- |
+| `master`  | Deployment branch  |
+| `dev`  | New functions and testing  |
+| `server`  | Stable active [server](https://p01--web--4cqtxswnrj4s.code.run/)  |
