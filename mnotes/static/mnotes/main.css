@@ -1,0 +1,239 @@
+.mapholder{
+    width: 75%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#map{
+    height: 100%;
+}
+
+#ourtable3_wrapper{
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.header{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.myTable{
+    font-size: 12px;
+    min-width: 400px;
+    overflow: hidden;
+    border-radius: 7px 7px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+}
+
+.myTable th {
+    background-color: #2D323E;
+    color: white;
+    font-weight: bold;
+  }
+
+.myTable td, .myTable th {
+    border: 0.01em solid #e3e2e2;
+  }
+
+.myTable tr:nth-child(even){background-color: #f9f8f8;}
+
+/* Formats the text*/
+#ourtable3_filter,
+#ourtable3_length,
+#ourtable3_info,
+#ourtable3_paginate{
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Formats the input fields*/
+#ourtable3_filter input,
+#ourtable3_length select{
+    border: 1px solid rgb(3, 154, 204);
+}
+
+.pageholder,
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.titleholder,
+.linkholder{
+    display: flex;
+    margin-top: 10px;
+    width: 98%;
+    border-radius: 5px;
+}
+
+.form1{
+    width: 30%;
+}
+
+form{
+    width:100%;
+}
+
+.titleholder{
+    display: 'flex';
+    justify-content:'space-between';
+    background-color: #2D323E;
+    align-items: center;
+    height: 40px;
+}
+
+.linkholder{
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+    flex-direction: column;
+
+}
+
+.title{
+    color: white;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title2{
+    color: #333;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.linkbox{
+    display: flex;
+    width:20%;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+}
+
+.button {
+  background-color: #0095ff;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button:hover,
+.submit:focus {
+  background-color: #07c;
+}
+
+.button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
+
+.button:disabled,
+submit[disabled]{
+  background-color: #cccccc;
+}
+
+.VkIdWebSdk__button_reset {
+       border: none;
+       margin: 0;
+       padding: 0;
+       width: auto;
+       overflow: visible;
+       background: transparent;
+       color: inherit;
+       font: inherit;
+       line-height: normal;
+       -webkit-font-smoothing: inherit;
+       -moz-osx-font-smoothing: inherit;
+       -webkit-appearance: none;
+     }
+
+     .VkIdWebSdk__button {
+       background: #0077ff;
+       cursor: pointer;
+       transition: all .1s ease-out;
+     }
+
+     .VkIdWebSdk__button:hover{
+       opacity: 0.8;
+     }
+
+     .VkIdWebSdk__button:active {
+       opacity: .7;
+       transform: scale(.97);
+     }
+
+     .VkIdWebSdk__button {
+       width: 100%;
+       min-height: 30px;
+     }
+
+     .VkIdWebSdk__button_container {
+       display: flex;
+       align-items: center;
+       padding: 8px 10px;
+     }
+
+     .VkIdWebSdk__button_icon + .VkIdWebSdk__button_text {
+       margin-left: -28px;
+     }
+
+     .VkIdWebSdk__button_text {
+       display: flex;
+       font-family: -apple-system, system-ui, "Helvetica Neue", Roboto, sans-serif;
+       flex: 1;
+       justify-content: center;
+       color: #ffffff;
+     }
