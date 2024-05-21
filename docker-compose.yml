@@ -9,7 +9,7 @@ services:
     volumes:
       - ~/.pg/pg_data/notes:/var/lib/postgresql/data
     env_file:
-      - .docker.env
+      - .db.env
   web:
     build:
       dockerfile: Dockerfile

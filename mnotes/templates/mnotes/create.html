@@ -13,11 +13,11 @@
       {% csrf_token %}
 
       {% if is_edit %}
-      {% include 'mnotes/map2.html' %}
+      {% include 'mnotes/map_edit.html' %}
       {% else %}
-      {% include 'mnotes/map3.html' %}
+      {% include 'mnotes/map_create.html' %}
       {% endif %}
-      <button class="submit" type="submit" id="submit_button">Create</button>
+      <button class="button" type="submit" id="submit_button">Create</button>
     </form>
   </div>
 </div>

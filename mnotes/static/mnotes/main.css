@@ -74,23 +74,6 @@ form{
     width: 98%;
     border-radius: 5px;
 }
-.ourbutton{
-    margin-right: 10px;
-    height: 30px;
-    width: 100px;
-    margin-left: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-
-    background-color: rgb(0, 0, 80);
-    color: white
-}
-
-.ourbutton:hover{
-    margin-right: 10px;
-    background-color: rgb(142, 142, 142);
-    color: white
-}
 
 .form1{
     width: 30%;
@@ -113,7 +96,6 @@ form{
     flex-direction: column;
 
 }
-
 
 .title{
     color: white;
@@ -138,17 +120,11 @@ form{
   border-radius: 50%;
 }
 
-.button {
-  background-color: #4267b1;
-  color: white;
-  padding: 4px 10px;
-  font-weight: 600;
-  font-size: 14px;
-  border-radius: 5px;
-}
-
-.button:hover {
-  color: white;
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }
 
 .linkbox{
@@ -164,7 +140,7 @@ form{
     box-shadow: 0 0 20px rgba(0, 0, 0, .15);
 }
 
-.submit {
+.button {
   background-color: #0095ff;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -190,21 +166,21 @@ form{
   white-space: nowrap;
 }
 
-.submit:hover,
+.button:hover,
 .submit:focus {
   background-color: #07c;
 }
 
-.submit:focus {
+.button:focus {
   box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
 }
 
-.submit:active {
+.button:active {
   background-color: #0064bd;
   box-shadow: none;
 }
 
-.submit:disabled,
+.button:disabled,
 submit[disabled]{
   background-color: #cccccc;
 }

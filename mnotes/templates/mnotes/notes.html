@@ -56,9 +56,11 @@
     </table>
     {% include 'mnotes/map.html' %}
     {% endif %}
-  </div>
-  <div>
-    <a href="{% url 'note_create' %}" class="button">Make a note</a>
+    <div class="container">
+      <button class="button" type="submit" id="submit_button"
+              style="left: 50%; transform: translateX(-50%)"
+      onclick="window.location.href = '{% url 'note_create' %}';">Make a note</button>
+    </div>
   </div>
 </div>
 
