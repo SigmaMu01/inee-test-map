@@ -1,8 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
+from .views import NoteView, index, note_edit, note_create, note_delete
 from .app_defaults import NO_LOGIN_REDIRECT
-from .views import NoteView, index, note_create, note_delete, note_edit
 
 
 urlpatterns = [

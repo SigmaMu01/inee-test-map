@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.gis.geos import Point
 from django.test import Client, TestCase
 from django.urls import reverse
+
 from mnotes.models import User, UserMapNote
 
 

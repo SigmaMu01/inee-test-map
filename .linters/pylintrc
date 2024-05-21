@@ -1,5 +1,5 @@
 [MESSAGES CONTROL]
-disable = E0401, E1101, C0114, C0115, C0116, R
+disable = E0401,E1101,C0411,C0114,C0115,C0116,R
 ignore-paths = ^mapawish/settings/.*$,
                ^mnotes/migrations/.*$,
                ^mnotes/tests/.*$,

@@ -1,17 +1,18 @@
 from allauth.socialaccount.models import SocialAccount
+
 from django.conf import settings
-from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.gis.geos import Point
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.gis.geos import Point
+from django.contrib.auth.decorators import login_required
 
-from .app_defaults import NO_LOGIN_REDIRECT, default_location
 from .forms import NoteCreateForm
 from .models import UserMapNote
+from .app_defaults import NO_LOGIN_REDIRECT, default_location
 
 
 __all__ = ("HttpResponse",)  # Store unused functions here (flake8 dev guide)
