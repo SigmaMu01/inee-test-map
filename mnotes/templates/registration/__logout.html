@@ -1,0 +1,10 @@
+<!-- registration/logout.html -->
+
+{% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Log out">
+</form>
+{% else $}
+<p>Log out successful.</p>
+{% endif %}

@@ -2,8 +2,8 @@ __pycache__/
 *.pyc
 
 # Environments
-.env
-.venv
+*.env
+.venv/
 env/
 venv/
 ENV/
@@ -13,5 +13,8 @@ venv.bak/
 # Django stuff:
 *.log
 *.pot
+
+# PyCharm
+.idea/
 
 start.cmd

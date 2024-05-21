@@ -1,0 +1,29 @@
+version: '3.12.3'
+
+services:
+  mapawish_db:
+    restart: always
+    image: postgis/postgis:16-3.4
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/.pg/pg_data/notes:/var/lib/postgresql/data
+    env_file:
+      - .db.env
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: django_notes:latest
+    container_name: django_notes
+    depends_on:
+      - mapawish_db
+    volumes:
+      - .:/src
+    ports:  # Use the default HTTP port since vk.com oauth2 does not support custom port routing for localhost
+      - "80:80"
+    env_file:
+      - .docker.env
+    command: >
+      bash -c "python manage.py makemigrations && python manage.py migrate && \
+      python manage.py runserver 0.0.0.0:80 --settings=mapawish.settings.prod"

@@ -1,0 +1,68 @@
+{% block content %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script>
+
+  async function initMap() {
+    var location = {{ location|safe }};
+    // Request needed libraries.
+    const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const map = new Map(document.getElementById("map"), {
+      center: { lat: location.lat, lng: location.lng },
+      zoom: 13,
+      mapId: "3",
+    });
+    const infoWindow = new InfoWindow();
+
+    var addMarker = once(placeMarkerAndPanTo);
+
+    map.addListener("click", (event) => {
+      addMarker(event.latLng, map);
+    });
+
+    document.getElementById("submit_button").disabled = true;
+    document.getElementById("id_map_pin_point").value = "Place a marker on the map.";
+  }
+
+  function once(fn, context) {
+      var result;
+      return function() {
+          if (fn) {
+              result = fn.apply(context || this, arguments);
+              fn = null;
+          }
+          return result;
+      };
+  }
+
+  function placeMarkerAndPanTo(latLng, map) {
+    const draggableMarker = new google.maps.marker.AdvancedMarkerElement({
+      position: latLng,
+      map: map,
+      gmpDraggable: true,
+    });
+    map.panTo(latLng);
+    document.getElementById("id_map_pin_point").value = (`${latLng.lat()},${latLng.lng()}`);
+    document.getElementById("submit_button").disabled = false;
+
+    draggableMarker.addListener("dragend", (event) => {
+      const position = draggableMarker.position;
+      document.getElementById("id_map_pin_point").value = (`${event.latLng.lat()},${event.latLng.lng()}`);
+    });
+  }
+
+  initMap();
+
+</script>
+<div class="linkholder">
+  <div class="mapholder">
+    <div id="map"></div>
+
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
+    </script>
+  </div>
+
+</div>
+
+{% endblock %}

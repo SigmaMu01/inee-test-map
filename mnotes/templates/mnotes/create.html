@@ -1,0 +1,24 @@
+{% extends 'mnotes/base.html' %}
+
+{% block content %}
+<div class="pageholder">
+  <div class="titleholder">
+    <div class="title"> Note Editor</div>
+  </div>
+  <div class="linkholder">
+    <form method="post">
+      <table>
+        {{ form }}
+      </table>
+      {% csrf_token %}
+
+      {% if is_edit %}
+      {% include 'mnotes/map_edit.html' %}
+      {% else %}
+      {% include 'mnotes/map_create.html' %}
+      {% endif %}
+      <button class="button" type="submit" id="submit_button">Create</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
