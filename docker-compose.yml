@@ -26,4 +26,4 @@ services:
       - .docker.env
     command: >
       bash -c "python manage.py makemigrations && python manage.py migrate && \
-      python manage.py runserver 0.0.0.0:80 --settings=mapawish.settings.prod"
+      python manage.py runserver 0.0.0.0:80  --insecure --settings=mapawish.settings.prod"
