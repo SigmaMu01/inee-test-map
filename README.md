@@ -1,25 +1,25 @@
-Nothing to report so far...
+# Python-developer trainee test project
 
+This repository contains all files required for "Places Remember" test project.
 
-TO-DO LIST:
+PDF-file with [the task](https://drive.google.com/file/d/130BXj-3AXM8pQ06fscjxg2V5C7HIwriI/view?usp=drive_link):
 
-* Add a default front page
-* Add user autenthication
-* Add postgres dependency
-* Add vk/mail.ru login
-* Add a list to the user front page
-* Add OpenStreetMap (django.admin.geomap or geodjango)
-* Add map pins
-* Congigure db to collect map data
+Link to [the server](https://p01--web--4cqtxswnrj4s.code.run/) (contact me in case this link is down) 
 
-* Add linters
-* Add tests
+## Supported features:
 
-* Add automatic tests (github actions)
-* Add docker configs
-* Add automatic docker containerization (github actions)
-* Add automatic linters (github actions)
-
-* Add bootstrap
-
-* Connect to pythonanywhere
+* Django framework
+* PostGIS database
+* VK authorization (using *allauth*)
+* Google Maps integration
+  * with multiple markers vizualization
+  * and the ability to drag them
+* Simple data protection from unauthorized users
+* Several linters included (<ins>GitHub Actions implemented</ins>):
+  * black
+  * isort
+  * flake
+  * pylint
+* Sufficient unit-test coverage (<ins>GitHub Actions implemented</ins>)
+* Docker and docker compose files included
+* The web-application is run on a VDS server
